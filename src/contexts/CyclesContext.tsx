@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useState, useReducer, useEffect } from "react";
 import { Cycle, cyclesReducer } from '../reducers/cycles/reducer'
-import { ActionTypes, addNewCycleAction, interruptCurrentCycleAction, markCurrentCycleAsFinishedAction } from "../reducers/cycles/actions";
+import { addNewCycleAction, interruptCurrentCycleAction, markCurrentCycleAsFinishedAction } from "../reducers/cycles/actions";
 import { differenceInSeconds } from "date-fns";
 
 interface CreateCycleData {
@@ -35,7 +35,7 @@ export function CyclesContextProvider({
     },
     (initialState) => {
       const storedStateAsJSON = localStorage.getItem(
-        '@ignite-timer:cycles-state-1.0.0'
+        '@ignite-timer:cycles-state-1.0.0',
       )
 
       if (storedStateAsJSON) {
@@ -53,7 +53,7 @@ export function CyclesContextProvider({
     if (activeCycle) {
       return differenceInSeconds(
         new Date(),
-        new Date(activeCycle.startDate),
+        new Date(activeCycle.startDate)
       )
     }
 

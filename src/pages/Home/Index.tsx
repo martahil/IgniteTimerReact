@@ -12,14 +12,14 @@ const newCycleFormValidationSchema = zod.object({
   task: zod.string().min(1, 'Enter the task'),
   minutesAmount: zod
     .number()
-    .min(1, 'The duration must be a minimum of 5 minutes.')
+    .min(5, 'The duration must be a minimum of 5 minutes.')
     .max(60, 'The duration must be a maximum of 60 minutes.'),
 })
 
 type NewCycleFormData = zod.infer<typeof newCycleFormValidationSchema>
 
 export function Home() {
-  const { activeCycle, createNewCycle, interruptCurrentCycle } = 
+  const { activeCycle, createNewCycle, interruptCurrentCycle } =
     useContext(CyclesContext)
 
   const newCycleForm = useForm<NewCycleFormData>({
@@ -30,7 +30,7 @@ export function Home() {
     }
   })
 
-  const { handleSubmit, watch, reset } = newCycleForm  
+  const { handleSubmit, watch, reset } = newCycleForm
 
   function handleCreateNewCycle(data: NewCycleFormData) {
     createNewCycle(data)
@@ -38,11 +38,11 @@ export function Home() {
   }
 
   const task = watch('task')
-  const isSubmitDisabled = !task;
+  const isSubmitDisable = !task;
 
   return (
     <HomeContainer>
-      <form onSubmit={handleSubmit(handleCreateNewCycle)}>        
+      <form onSubmit={handleSubmit(handleCreateNewCycle)}>
         <FormProvider {...newCycleForm}>
           <NewCycleForm />
         </FormProvider>
@@ -54,7 +54,7 @@ export function Home() {
             Stop
           </StopCountdownButton>
         ) : (
-          <StartCountdownButton disabled={isSubmitDisabled} type="submit">
+          <StartCountdownButton disabled={isSubmitDisable} type="submit">
             <Play size={24} />
             Start
           </StartCountdownButton>

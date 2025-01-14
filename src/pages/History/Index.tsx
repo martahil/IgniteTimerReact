@@ -21,13 +21,13 @@ export function History() {
             </tr>
           </thead>
           <tbody>
-            {cycles.map(cycle => {
+            {cycles.map((cycle) => {
               return (
                 <tr key={cycle.id}>
                   <td>{cycle.task}</td>
                   <td>{cycle.minutesAmount} minutes</td>
                   <td>{formatDistanceToNow(new Date(cycle.startDate), {
-                    addSuffix: true
+                    addSuffix: true,
                   })}</td>
                   <td>
                     {cycle.finishedDate && (
@@ -38,7 +38,7 @@ export function History() {
                       <Status statusColor="red">Interrupted</Status>
                     )}
 
-                    {(!cycle.finishedDate && !cycle.interruptedDate) && (
+                    {!cycle.finishedDate && !cycle.interruptedDate && (
                       <Status statusColor="yellow">In progress</Status>
                     )}
                   </td>
